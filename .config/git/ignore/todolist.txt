@@ -1,0 +1,79 @@
+Data/Brands - make a template for one website and apply it to them all
+- Brand websites/general websites:
+    - Day Owl
+    - tomtoc
+    - Aer
+    - Kipling
+    - High Sierra
+    - Herschel
+    - Timbuk2
+    - Packllama
+    - Nordace
+    - Torubador
+    - Patagonia
+    - Jansport
+    - Brevite
+    - Lululemon
+    - The North Face
+    - Bellroy
+    - Away
+    - Baboon to the Moon
+    - Calpak
+    - Evergoods
+    - AbleCarry
+    - Alpaka
+    - Arcido
+    - Cabin Zero
+    - Navajo
+    - The Brown Buffalo
+    - Chuyen Tactical
+    - Ethnotec
+    - Inside Line Equipment
+    - Waymark Gear Co.,
+    - Atlas 46
+    - Triple Aught Design,
+    - Decathlon Backpacks
+    - Tortuga Backpacks
+    - No Bull Project
+    - Recycled Firefighter
+    - Nutsac
+    - Filson
+    - Stubble and Co.
+    - Roark, Mountain Hardwear
+    - Kelty Backpacks
+    - Chrome Industries
+    - Red Oxx
+    - Mission Workshop
+    - Osprey
+    - Tumi
+    - Peak Design
+    - Nomad
+    - Tom Bihn
+    - nomatic
+    - BEIS
+    - Fjällräven
+    - Adidas 
+    - Nike
+    - Doughnut
+
+- ^^ Retailers, exclude dupes (howw??) 
+    - REI
+    - Target
+
+Pages:
+- Full list, sort columns low to high with arrows
+    - Additional sort by 
+    - Price range (default 0 - maxprice)
+    - Capacity (default 0 - maxsize) - calculate from dimensions and round
+    - Brand (searchable dropdown)
+    - GPT generate tags
+
+- Compare 
+    - (searchable dropdown), like apple websites
+    - Arrange specs in rows
+
+- Shop by Brand
+
+- Chatbot?
+    - ChatGPT config for backpack recommendations based on the site
+
