@@ -1,5 +1,5 @@
 Data/Brands - make a template for one website and apply it to them all
-- Brand websites/general websites:
+- Brand websites/general websites: (check brands on target/rei first so no overlap)
     - Day Owl
     - tomtoc
     - Aer
@@ -58,7 +58,7 @@ Data/Brands - make a template for one website and apply it to them all
 
 - ^^ Retailers, exclude dupes (howw??) 
     - REI
-    - Target
+    - Target - https://www.target.com/c/adult-backpacks-luggage/-/N-55ks5
 
 Pages:
 - Full list, sort columns low to high with arrows
