@@ -85,41 +85,37 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 from webdriver_manager.chrome import ChromeDriverManager
-import time
 
 # Set up Selenium using Chrome WebDriver
 options = webdriver.ChromeOptions()
-options.add_argument('--headless')  # Run headless mode if needed
+# options.add_argument('--headless')  # Uncomment this line to run in headless mode if needed
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
-# Function to get backpack links from a specific nested div using Selenium
+# Function to get backpack links using staged search
 def get_backpack_links(driver):
     backpack_links = []
-    # Wait until the product grid is present
-    WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "div[data-test='productGrid']"))
-    )
-    
-    # Find all anchor tags within the product grid
-    product_elements = driver.find_elements(By.XPATH, "//div[contains(@class, 'styles__StyledListProduct')]//a[contains(@href, '/p/')]")
-    for element in product_elements:
-        href = element.get_attribute('href')
-        if href not in backpack_links:  # Check for duplicates
-            backpack_links.append(href)
-    return backpack_links
-
-# Function to find and click the "Next" button
-def find_and_click_next_page(driver):
     try:
-        # Wait until the "Next" button is present and clickable
-        next_button = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@aria-label='Next page']"))
+        # Wait for the main container that includes all product sections
+        WebDriverWait(driver, 30).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "div[data-test='product-grid-container']"))
         )
-        next_button.click()  # Click the "Next" button
-        return True
-    except:
-        return False
+        
+        # Find the main product grid container
+        product_grid = driver.find_element(By.CSS_SELECTOR, "div[data-test='product-grid-container']")
+
+        # Find all product links within the product grid
+        product_elements = product_grid.find_elements(By.CSS_SELECTOR, "a[data-test='product-title']")
+        
+        for element in product_elements:
+            href = element.get_attribute('href')
+            if href not in backpack_links:  # Check for duplicates
+                backpack_links.append(href)
+        
+    except TimeoutException:
+        print("TimeoutException: Product elements could not be found within the given time.")
+    return backpack_links
 
 # Starting URL (first page)
 start_url = "https://www.target.com/c/adult-backpacks-luggage/-/N-55ks5"
@@ -127,17 +123,24 @@ start_url = "https://www.target.com/c/adult-backpacks-luggage/-/N-55ks5"
 all_backpack_links = []
 driver.get(start_url)
 
-while True:
-    # Get links from the current page
-    backpack_links = get_backpack_links(driver)
-    all_backpack_links.extend(backpack_links)
+# Debug: Print current URL
+print(f"Current URL: {driver.current_url}")
 
-    # Attempt to go to the next page
-    if not find_and_click_next_page(driver):
-        break  # Exit loop if no next page is found
+# Wait for page to fully load (useful for dynamic content)
+WebDriverWait(driver, 30).until(
+    EC.presence_of_element_located((By.CSS_SELECTOR, "div[data-test='product-grid-container']"))
+)
 
-    # Optional: Add a delay to mimic human browsing and prevent being blocked
-    time.sleep(2)
+# Debug: Execute JS to check if product grid is loaded
+is_product_grid_present = driver.execute_script("return document.querySelector('div[data-test=\"product-grid-container\"]') !== null;")
+print(f"Is product grid present: {is_product_grid_present}")
+
+# Get links from the current page
+backpack_links = get_backpack_links(driver)
+all_backpack_links.extend(backpack_links)
+
+# Debug: Print the number of links found
+print(f"Number of backpack links found: {len(backpack_links)}")
 
 # Remove duplicate links
 all_backpack_links = list(set(all_backpack_links))
@@ -150,4 +153,3 @@ for link in all_backpack_links:
     print(link)
 
 print(f"Total backpacks found: {len(all_backpack_links)}")
-
