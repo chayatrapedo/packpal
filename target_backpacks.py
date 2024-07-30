@@ -1,13 +1,14 @@
 # GET TARGET DATA FROM THE BACKEND
+import os
 from playwright.sync_api import sync_playwright
 import requests
 
-def get_cookie_playwright():
+def get_cookie_playwright(link):
     with sync_playwright() as p:
         browser = p.chromium.launch()
         context = browser.new_context()
         page = context.new_page()
-        page.goto("https://www.target.com/c/adult-backpacks-luggage/-/N-55ks5")
+        page.goto(link)
         # Ensure this is the correct index or method to retrieve the cookie
         cookies = context.cookies()
         # Example to find the specific cookie; adjust as necessary
@@ -49,10 +50,40 @@ def req_with_cookie(cookie_for_requests):
         }
     )
     return response
-
+        
+        
+def main():
+    
+    output_dir = "Target Backpack JSONS"
+    os.makedirs(output_dir, exist_ok=True)
+    
+    amt = 0
+    while True:
+        try: 
+            link = f"https://www.target.com/c/adult-backpacks-luggage/-/N-55ks5Zxyok5Zqvwd2Zmfp85?moveTo=product-list-grid&Nao={amt}"
+            data = req_with_cookie(get_cookie_playwright(link))
+            
+            filename = f"output_{amt//24}.json"
+            output_path = os.path.join(output_dir, filename)
+            
+            with open(output_path, "w") as output:
+                output.write(data.text)
+            amt += 24
+        except:
+            print(amt)
+            break
+    
 if __name__ == '__main__':
-    try:
-        data = req_with_cookie(get_cookie_playwright())
-        print(data.text)  # Print response text for debugging
-    except Exception as e:
-        print(f"An error occurred: {e}")
+    main()
+    
+    # try:
+    #     amt = 0 
+    #     link = f"https://www.target.com/c/adult-backpacks-luggage/-/N-55ks5Zxyok5Zqvwd2Zmfp85?moveTo=product-list-grid&Nao={amt}"
+    #     data = req_with_cookie(get_cookie_playwright(link))
+    #     with open("output.json", "w") as output:
+    #         output.write(data.text)
+    #    # print(data.text)  # Print response text for debugging
+    # except Exception as e:
+    #     print(f"An error occurred: {e}") 
+        
+## need to still get data from other pages - bring back soup or selenium?

@@ -1,60 +1,37 @@
 Data/Brands - make a template for one website and apply it to them all
-- Brand websites/general websites: (check brands on target/rei first so no overlap)
-    - Day Owl
+- Brand websites/general websites - run on Shopify
+https://www.youtube.com/watch?v=jPjxWC7zV2s&ab_channel=JohnWatsonRooney
     - tomtoc
-    - Aer
-    - Kipling
-    - High Sierra
-    - Herschel
     - Timbuk2
-    - Packllama
-    - Nordace
-    - Torubador
-    - Patagonia
-    - Jansport
+    - Torubador Goods
     - Brevite
-    - Lululemon
-    - The North Face
-    - Bellroy
-    - Away
-    - Baboon to the Moon
     - Calpak
-    - Evergoods
     - AbleCarry
     - Alpaka
     - Arcido
     - Cabin Zero
-    - Navajo
-    - The Brown Buffalo
-    - Chuyen Tactical
     - Ethnotec
     - Inside Line Equipment
-    - Waymark Gear Co.,
-    - Atlas 46
-    - Triple Aught Design,
-    - Decathlon Backpacks
+    - Decathlon Backpacks 
     - Tortuga Backpacks
-    - No Bull Project
-    - Recycled Firefighter
-    - Nutsac
-    - Filson
-    - Stubble and Co.
-    - Roark, Mountain Hardwear
-    - Kelty Backpacks
     - Chrome Industries
-    - Red Oxx
-    - Mission Workshop
-    - Osprey
-    - Tumi
-    - Peak Design
-    - Nomad
-    - Tom Bihn
-    - nomatic
+    - Doughtnut Products
     - BEIS
-    - Fjällräven
-    - Adidas 
-    - Nike
-    - Doughnut
+    - Peak Design
+    - nomatic
+    - Tom Bihn
+    - Vera Bradley
+    - Stubble and Co.
+    - Got Bag
+    - Aer 
+    - Pacsafe
+    - Topo Designs
+
+
+Manual Picks:
+- DayOwl
+- Tumi
+- Fjallraven
 
 - ^^ Retailers, exclude dupes (howw??) 
     - REI
