@@ -9,10 +9,9 @@ import xml.etree.ElementTree as ET
 
 def clean_html(body):
     ans = re.sub(r'<[^>]+>', '', body)
-    print(ans)
     return ans
 
-def get_json(url): # split by " | " to brand, url, producttype
+def get_json(brand, url, type): # split by " | " to brand, url, producttype
     
     r = requests.get(url)
     data = r.json()
@@ -36,11 +35,12 @@ def get_json(url): # split by " | " to brand, url, producttype
             colors += [variant["title"]]
             price = variant["price"]
             available = variant["available"]
-            
-        if "pack" in product_type.lower():
+        
+        print(type, product_type.lower())   
+        if type in product_type.lower():
             
             product = {
-                "brand": "Tomtoc",
+                "brand": brand,
                 "title": title,
                 "image_link": imagesrc,
                 "num_colors": num_colors,
@@ -58,10 +58,23 @@ def get_json(url): # split by " | " to brand, url, producttype
             
             all_backpacks.append(product)
             
-    df = pd.DataFrame(all_backpacks)
-    df.to_csv("tomtoc.csv")
-    print(f"saved {len(all_backpacks)}")          
+    return all_backpacks        
     
 if __name__ == "__main__":
-    url = "https://tomtoc.com/products.json?limit=250"
-    get_json(url)
+    backpacks = []
+    with open("websiteslist.txt", "r") as sites:
+        for site in sites:
+            parts = site.split("|")
+            brand = parts[0]
+            url = parts[1]
+            print(url)
+            producttype = parts[-1]
+            backpacks += get_json(brand, url, producttype[:-1])
+
+        df = pd.DataFrame(backpacks)
+        df.to_csv("backpacks.csv")
+        print(f"saved {len(backpacks)}")  
+                
+            
+    #url = "https://tomtoc.com/products.json?limit=250"
+   # get_json(url)
