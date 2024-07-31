@@ -12,7 +12,7 @@ def clean_html(body):
     print(ans)
     return ans
 
-def get_json(url):
+def get_json(url): # split by " | " to brand, url, producttype
     
     r = requests.get(url)
     data = r.json()
@@ -37,7 +37,7 @@ def get_json(url):
             price = variant["price"]
             available = variant["available"]
             
-        if product_type == "Backpack":
+        if "pack" in product_type.lower():
             
             product = {
                 "brand": "Tomtoc",
@@ -60,13 +60,7 @@ def get_json(url):
             
     df = pd.DataFrame(all_backpacks)
     df.to_csv("tomtoc.csv")
-    print(f"saved {len(all_backpacks)}")
-            
-        
-        
-        
-        
-            
+    print(f"saved {len(all_backpacks)}")          
     
 if __name__ == "__main__":
     url = "https://tomtoc.com/products.json?limit=250"
