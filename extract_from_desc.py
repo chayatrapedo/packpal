@@ -10,7 +10,7 @@ def extract_info_v4(desc):
     # Regex patterns for dimensions, capacity, and laptop size
     dim_pattern = re.compile(r'\b(\d{1,2}\s*[xX*]\s*\d{1,2}\s*[xX*]\s*\d{1,2})\s*(inches|inch|in)\b', re.IGNORECASE)
     cap_pattern = re.compile(r'(\d{1,2})\s*(liters|l)\b', re.IGNORECASE)
-    laptop_pattern = re.compile(r'(\d{1,2})\s*(inch|inches|in)\s*(laptop|screen|display)?\b', re.IGNORECASE)
+    laptop_pattern = re.compile(r'(\d{1,2})\s*(inch|inches|in|")\s*(laptop|screen|display)?\b', re.IGNORECASE)
     
     dimensions = None
     capacity = None
